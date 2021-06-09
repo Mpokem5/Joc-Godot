@@ -7,8 +7,9 @@ extends KinematicBody2D
 var bullet = preload("res://Scenes/Bullet.tscn")
 var dir : String
 var moving : bool
+var can_dash : bool = true
 var CENTER : Vector2 = get_viewport_rect().size/2
-const SPEED : int = 200
+var SPEED : int = 5000
 const ROTATION := {"U" : Vector2(0,-1), "D" : Vector2(0,1), "L" : Vector2(-1,0), "R" : Vector2(1,0),
 					"UR" : Vector2(0.5,-0.5), "UL" : Vector2(-0.5,-0.5), "DR" : Vector2(0.5,0.5), "DL" : Vector2(-0.5,0.5)}
 
@@ -22,6 +23,7 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
+
 
 func _physics_process(delta):
 	moving = true
@@ -46,6 +48,8 @@ func _physics_process(delta):
 	else:
 		moving = false
 	if moving:
+		if Input.is_action_just_released("dash") && can_dash:
+			dash()
 		move(delta)
 
 func shoot():
@@ -57,10 +61,18 @@ func shoot():
 	
 func move(delta) -> void:
 	var movement = delta * SPEED * ROTATION[dir]
-	move_and_collide(movement)
+	move_and_slide(movement)
 	
-
+func dash() -> void:
+	SPEED = 50000
+	can_dash = false
+	$Timer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_Timer_timeout():
+	SPEED = 5000
+	can_dash = true
