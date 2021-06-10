@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Sprites/Walls/cube.png" type="Texture" id=12]
+
+[node name="Walls" type="Node2D"]
+
+[node name="cube" type="Sprite" parent="."]
+position = Vector2( 194.931, 174.909 )
+texture = ExtResource( 12 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="cube"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="cube/StaticBody2D"]
+polygon = PoolVector2Array( -118.931, 69.0914, 0.0694733, 137.591, 120.069, 68.0914, 0.569473, 0.0914307 )

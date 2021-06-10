@@ -5,7 +5,7 @@ extends Area2D
 # var a = 2
 # var b = "text"
 
-var SPEED = 500
+var SPEED = 1000
 var direction : Vector2
 var shooter : Node
 
