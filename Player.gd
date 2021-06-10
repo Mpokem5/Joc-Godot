@@ -9,7 +9,7 @@ var dir : String
 var moving : bool
 var can_dash : bool = true
 var CENTER : Vector2 = get_viewport_rect().size/2
-var SPEED : int = 5000
+var SPEED : int = 10000
 const ROTATION := {"U" : Vector2(0,-1), "D" : Vector2(0,1), "L" : Vector2(-1,0), "R" : Vector2(1,0),
 					"UR" : Vector2(0.5,-0.5), "UL" : Vector2(-0.5,-0.5), "DR" : Vector2(0.5,0.5), "DL" : Vector2(-0.5,0.5)}
 
@@ -48,7 +48,7 @@ func _physics_process(delta):
 	else:
 		moving = false
 	if moving:
-		if Input.is_action_just_released("dash") && can_dash:
+		if Input.is_action_just_pressed("dash") && can_dash:
 			dash()
 		move(delta)
 
@@ -66,13 +66,18 @@ func move(delta) -> void:
 func dash() -> void:
 	SPEED = 50000
 	can_dash = false
-	$Timer.start()
+	$Duration.start()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
 
-func _on_Timer_timeout():
-	SPEED = 5000
+func _on_Duration_timeout():
+	SPEED = 10000
+	$CanDash.start()
+
+
+func _on_CanDash_timeout():
 	can_dash = true
