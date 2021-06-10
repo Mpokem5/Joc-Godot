@@ -56,7 +56,8 @@ func shoot():
 	var direction = (get_global_mouse_position() - position).normalized()
 	var bullet_ins = bullet.instance()
 	bullet_ins.ini(direction,position)
-	get_tree().get_root().add_child(bullet_ins)
+	get_node("/root/Pantalla1/Bullet").add_child(bullet_ins)
+	#get_tree().get_root().add_child(bullet_ins)
 	print(dir)
 	
 func move(delta) -> void:
