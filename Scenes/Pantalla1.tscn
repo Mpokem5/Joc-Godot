@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Tileset/Floor.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Jugador.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Tileset/Slope.tres" type="TileSet" id=3]
-[ext_resource path="res://Tileset/Wall.tres" type="TileSet" id=4]
-[ext_resource path="res://Sprites/Walls/cube.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/SlopeRight.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/SlopeLeft.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sprites/Walls/cube_slope_left.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/Camera_control.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Cube.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/SlopeCorner.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Sprites/Walls/cube_slope_right.png" type="Texture" id=9]
+[ext_resource path="res://Sounds/bensound-scifi.mp3" type="AudioStream" id=10]
 
 [node name="Pantalla1" type="Node2D"]
 
@@ -13,55 +17,265 @@
 position = Vector2( 0, -1.5 )
 mode = 1
 tile_set = ExtResource( 1 )
-cell_size = Vector2( 240, 139 )
+cell_size = Vector2( 240, 138 )
 format = 1
-tile_data = PoolIntArray( -655360, 536870918, 0, -655359, 536870914, 0, -589823, 536870915, 0, -589822, 536870914, 0, -524287, 536870916, 0, -524286, 536870913, 0, -458752, 536870916, 0, -458751, 536870913, 0, -458750, 536870912, 0, -458747, 0, 0, -458746, 6, 0, -458745, 0, 0, -393211, 0, 0, -393210, 6, 0, -393209, 0, 0, -327675, 4, 0, -327674, 1, 0, -327673, 0, 0, -262144, 7, 0, -262143, 3, 0, -262142, 0, 0, -262141, 4, 0, -262140, 7, 0, -262139, 1, 0, -262138, 0, 0, -262137, 0, 0, -196608, 0, 0, -196607, 2, 0, -196606, 3, 0, -196605, 6, 0, -196604, 0, 0, -196603, 0, 0, -196602, 0, 0, -196601, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 6, 0, -131069, 2, 0, -131068, 3, 0, -131067, 0, 0, -131066, 4, 0, -131065, 7, 0, -131064, 7, 0, -131063, 3, 0, -131062, 0, 0, -131061, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 6, 0, -65533, 4, 0, -65532, 1, 0, -65531, 0, 0, -65530, 6, 0, -65529, 0, 0, -65528, 0, 0, -65527, 2, 0, -65526, 3, 0, -65525, 2, 0, 0, 0, 0, 1, 0, 0, 2, 2, 0, 3, 1, 0, 4, 0, 0, 10, 6, 0, 11, 0, 0, 65546, 6, 0, 65547, 0, 0, 131082, 1, 0, 131083, 0, 0 )
+tile_data = PoolIntArray( -589825, 4, 0, -655360, 536870918, 0, -655359, 536870914, 0, -524289, 6, 0, -589824, 0, 0, -589823, 536870915, 0, -589822, 536870914, 0, -458753, 6, 0, -524288, 0, 0, -524287, 536870916, 0, -524286, 536870913, 0, -393217, 6, 0, -458752, 536870916, 0, -458751, 536870913, 0, -458750, 536870912, 0, -458747, 0, 0, -458746, 6, 0, -458745, 0, 0, -393211, 0, 0, -393210, 6, 0, -393209, 0, 0, -327675, 4, 0, -327674, 1, 0, -327673, 0, 0, -196609, 4, 0, -262144, 7, 0, -262143, 3, 0, -262142, 0, 0, -262141, 4, 0, -262140, 7, 0, -262139, 1, 0, -262138, 0, 0, -262137, 0, 0, -131073, 6, 0, -196608, 0, 0, -196607, 2, 0, -196606, 3, 0, -196605, 6, 0, -196604, 0, 0, -196603, 0, 0, -196602, 0, 0, -196601, 0, 0, -65537, 6, 0, -131072, 0, 0, -131071, 0, 0, -131070, 6, 0, -131069, 2, 0, -131068, 3, 0, -131067, 0, 0, -131066, 4, 0, -131065, 7, 0, -131064, 7, 0, -131063, 3, 0, -131062, 0, 0, -131061, 0, 0, -1, 2, 0, -65536, 3, 0, -65535, 0, 0, -65534, 6, 0, -65533, 4, 0, -65532, 1, 0, -65531, 0, 0, -65530, 6, 0, -65529, 0, 0, -65528, 0, 0, -65527, 2, 0, -65526, 3, 0, -65525, 2, 0, 65535, 3, 0, 0, 6, 0, 1, 0, 0, 2, 2, 0, 3, 1, 0, 4, 0, 0, 10, 6, 0, 11, 0, 0, 131071, 6, 0, 65536, 2, 0, 65537, 7, 0, 65538, 7, 0, 65539, 3, 0, 65540, 0, 0, 65546, 6, 0, 65547, 0, 0, 131082, 1, 0, 131083, 0, 0, 196618, 0, 0, 196619, 0, 0, 262153, 1, 0, 262154, 0, 0, 262155, 0, 0, 262156, 2, 0, 262157, 3, 0, 327689, 3, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 6, 0, 393225, 6, 0, 393226, 4, 0, 393227, 7, 0, 393228, 7, 0, 393229, 1, 0, 458761, 6, 0, 458762, 6, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 978.416, 507.424 )
+[node name="SlopeLeft" parent="." instance=ExtResource( 4 )]
+position = Vector2( 960.159, -138.953 )
 
-[node name="Bullet" type="Node2D" parent="."]
+[node name="SlopeRight" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1200.16, -137.953 )
 
-[node name="TileMap" type="TileMap" parent="." groups=[
+[node name="SlopeCorner" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1080.16, -70.9535 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Slope" type="YSort" parent="YSort"]
+sort_enabled = false
+
+[node name="Player" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 616, 1227 )
+collision_layer = 3
+
+[node name="Height0" type="YSort" parent="YSort" groups=[
 "wall",
 ]]
-mode = 1
-tile_set = ExtResource( 4 )
-cell_size = Vector2( 240, 139 )
-show_collision = true
-format = 1
-tile_data = PoolIntArray( -589821, 0, 0, -589820, 0, 0, -589819, 0, 0, -589818, 0, 0, -589817, 0, 0, -524281, 0, 0, -458745, 0, 0, -327681, 0, 0, -393216, 0, 0, -393209, 0, 0, -327673, 0, 0, -262137, 0, 0, -262136, 0, 0, -262135, 0, 0, -262134, 0, 0, -262133, 0, 0, -196597, 0, 0 )
+position = Vector2( 1, -1 )
 
-[node name="cube2" type="Sprite" parent="."]
-position = Vector2( 1321.01, -208.825 )
+[node name="Cube3" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1560, 552 )
+
+[node name="Cube4" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1679, 621 )
+
+[node name="Cube" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1320, 414 )
+
+[node name="Cube2" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1440, 483 )
+
+[node name="Cube5" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1440, 345 )
+
+[node name="Cube6" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1560, 275 )
+
+[node name="Cube7" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1680, 205 )
+
+[node name="Cube9" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1440, -207 )
+
+[node name="Cube10" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1560, -138 )
+
+[node name="Cube11" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1680, -69 )
+
+[node name="Cube13" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1920, 68 )
+
+[node name="Cube14" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1799, 136 )
+
+[node name="Cube12" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1800, -1 )
+
+[node name="Cube8" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1079, 690 )
+
+[node name="Cube16" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 841, 828 )
+
+[node name="Cube17" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 960, 621 )
+
+[node name="Cube18" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 840, 552 )
+
+[node name="Cube19" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 720, 482 )
+
+[node name="Cube20" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 600, 414 )
+
+[node name="Cube15" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 960, 759 )
+
+[node name="Cube21" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 480, 483 )
+
+[node name="Cube22" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 359, 552 )
+
+[node name="Cube23" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 239, 482 )
+
+[node name="Cube24" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 120, 414 )
+
+[node name="Cube25" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 0, 345 )
+
+[node name="Cube26" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( -119, 275 )
+
+[node name="Cube27" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( -238, 206 )
+
+[node name="Cube28" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1799, 690 )
+
+[node name="Cube29" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1680, 759 )
+
+[node name="Cube30" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1560, 827 )
+
+[node name="Cube31" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1440, 896 )
+
+[node name="Cube32" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1321, 965 )
+
+[node name="Cube33" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1201, 1034 )
+
+[node name="Cube34" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1080, 1103 )
+
+[node name="Cube35" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1199, 1172 )
+
+[node name="Cube36" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1318, 1241 )
+
+[node name="Cube37" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1199, 1310 )
+
+[node name="Cube38" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 1079, 1379 )
+
+[node name="Cube39" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 959, 1448 )
+
+[node name="Cube40" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 839, 1517 )
+
+[node name="Cube41" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 720, 1586 )
+
+[node name="Cube42" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 600, 1517 )
+
+[node name="Cube43" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 480, 1449 )
+
+[node name="Cube44" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 360, 1380 )
+
+[node name="Cube45" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 241, 1311 )
+
+[node name="Cube46" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 721, 897 )
+
+[node name="Cube47" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 602, 827 )
+
+[node name="Cube48" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 482, 896 )
+
+[node name="Cube49" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 361, 965 )
+
+[node name="Cube50" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 241, 1035 )
+
+[node name="Cube51" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 122, 1104 )
+
+[node name="Cube52" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 122, 1242 )
+
+[node name="Cube53" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 3, 1173 )
+
+[node name="Cube54" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 718, -207 )
+
+[node name="Cube55" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 598, -276 )
+
+[node name="Cube56" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 479, -344 )
+
+[node name="Cube57" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 359, -413 )
+
+[node name="Cube58" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 240, -344 )
+
+[node name="Cube59" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 120, -275 )
+
+[node name="Cube60" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( 0, -206 )
+
+[node name="Cube61" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( -120, -137 )
+
+[node name="Cube62" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( -239, -68 )
+
+[node name="Cube63" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( -359, 1 )
+
+[node name="Cube64" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( -359, 138 )
+
+[node name="Cube65" parent="YSort/Height0" instance=ExtResource( 7 )]
+position = Vector2( -478, 70 )
+
+[node name="Bullet" type="Node2D" parent="YSort"]
+
+[node name="SlopeCube" type="Sprite" parent="YSort" groups=[
+"wall",
+]]
+position = Vector2( 1320, -208 )
+texture = ExtResource( 9 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="YSort/SlopeCube" groups=[
+"wall",
+]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/SlopeCube/StaticBody2D"]
+polygon = PoolVector2Array( -119, -69, 0, 138, 121, 67 )
+
+[node name="SlopeCube2" type="Sprite" parent="YSort" groups=[
+"wall",
+]]
+position = Vector2( 839, -208 )
 texture = ExtResource( 5 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="cube2" groups=[
+[node name="StaticBody2D" type="StaticBody2D" parent="YSort/SlopeCube2" groups=[
 "wall",
 ]]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="cube2/StaticBody2D"]
-polygon = PoolVector2Array( -120.025, -67.9063, -1.60522, 138.627, 119.621, 67.3504 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/SlopeCube2/StaticBody2D"]
+polygon = PoolVector2Array( -120, 68, 0, 138, 120, -69 )
 
-[node name="cube" type="Sprite" parent="."]
-position = Vector2( 839.136, -209.493 )
-texture = ExtResource( 5 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="cube" groups=[
-"wall",
-]]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="cube/StaticBody2D"]
-scale = Vector2( -1, 1 )
-polygon = PoolVector2Array( -120.025, -67.9063, -1.60522, 138.627, 119.621, 67.3504 )
-
-[node name="Slope" type="TileMap" parent="."]
-mode = 1
-tile_set = ExtResource( 3 )
-cell_size = Vector2( 240, 139 )
-format = 1
-tile_data = PoolIntArray( -458749, 536870913, 0, -393214, 536870914, 0, -393213, 536870912, 0 )
+[node name="YSort" type="YSort" parent="YSort"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 script = ExtResource( 6 )
+
+[node name="Explosion" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -10.0
+autoplay = true

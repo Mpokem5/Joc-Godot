@@ -1,19 +1,179 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Sounds/mixkit-fast-sci-fi-transition-sweep-3114.wav" type="AudioStream" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32.0246, 31.9935 )
+[sub_resource type="StreamTexture" id=10]
+flags = 4
+load_path = "res://.import/spritesheet.png-48e73ae10dcf05920b526aa1529ead4b.stex"
+
+[sub_resource type="Animation" id=1]
+resource_name = "IdleDown"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "IdleLeft"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 9 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "IdleRight"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "IdleUp"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "WalkDown"
+length = 0.5
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "WalkLeft"
+length = 0.5
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 10, 11 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "WalkRight"
+length = 0.5
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 4, 5 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "WalkUp"
+length = 0.5
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 6, 7 ]
+}
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 27.2382, 16.2803 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+position = Vector2( 2.52269, -30.062 )
+scale = Vector2( 0.1, 0.1 )
+texture = SubResource( 10 )
+hframes = 6
+vframes = 2
+frame = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+anims/IdleDown = SubResource( 1 )
+anims/IdleLeft = SubResource( 2 )
+anims/IdleRight = SubResource( 3 )
+anims/IdleUp = SubResource( 4 )
+anims/WalkDown = SubResource( 5 )
+anims/WalkLeft = SubResource( 6 )
+anims/WalkRight = SubResource( 7 )
+anims/WalkUp = SubResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+position = Vector2( 0.403793, -0.397038 )
+shape = SubResource( 9 )
 
 [node name="Duration" type="Timer" parent="."]
 wait_time = 0.1
@@ -23,5 +183,14 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="Dash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+volume_db = -2.0
+
+[node name="CanShoot" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
 [connection signal="timeout" from="Duration" to="." method="_on_Duration_timeout"]
 [connection signal="timeout" from="CanDash" to="." method="_on_CanDash_timeout"]
+[connection signal="timeout" from="CanShoot" to="." method="_on_CanShoot_timeout"]
