@@ -9,9 +9,9 @@
 [ext_resource path="res://Scenes/Cube.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/SlopeCorner.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Sprites/Walls/cube_slope_right.png" type="Texture" id=9]
-[ext_resource path="res://Sounds/bensound-scifi.mp3" type="AudioStream" id=10]
+[ext_resource path="res://Scenes/Enemic.tscn" type="PackedScene" id=10]
 
-[node name="Pantalla1" type="Node2D"]
+[node name="Joc" type="Node2D"]
 
 [node name="Floor" type="TileMap" parent="."]
 position = Vector2( 0, -1.5 )
@@ -34,10 +34,6 @@ position = Vector2( 1080.16, -70.9535 )
 
 [node name="Slope" type="YSort" parent="YSort"]
 sort_enabled = false
-
-[node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 616, 1227 )
-collision_layer = 3
 
 [node name="Height0" type="YSort" parent="YSort" groups=[
 "wall",
@@ -250,6 +246,7 @@ texture = ExtResource( 9 )
 [node name="StaticBody2D" type="StaticBody2D" parent="YSort/SlopeCube" groups=[
 "wall",
 ]]
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/SlopeCube/StaticBody2D"]
 polygon = PoolVector2Array( -119, -69, 0, 138, 121, 67 )
@@ -263,6 +260,7 @@ texture = ExtResource( 5 )
 [node name="StaticBody2D" type="StaticBody2D" parent="YSort/SlopeCube2" groups=[
 "wall",
 ]]
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/SlopeCube2/StaticBody2D"]
 polygon = PoolVector2Array( -120, 68, 0, 138, 120, -69 )
@@ -276,6 +274,15 @@ script = ExtResource( 6 )
 [node name="Explosion" type="Node2D" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 10 )
 volume_db = -10.0
 autoplay = true
+
+[node name="Joan" parent="." instance=ExtResource( 10 )]
+position = Vector2( 334.333, -18.9427 )
+
+[node name="Pere" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1064.69, -461.366 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 616, 1227 )
+collision_layer = 3

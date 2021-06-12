@@ -1,14 +1,14 @@
 extends KinematicBody2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-var bullet = preload("res://Scenes/Bullet.tscn")
 var dir : String
 var moving : bool
-var can_dash : bool = true
-var can_shoot : bool = true
+var can_dash = true
+var can_shoot = true
+var hp = 1000
+var current_hp
+var bullet = preload("res://Scenes/Bullet.tscn")
+
 onready var animationPlayer = $Sprite/AnimationPlayer
 var CENTER : Vector2 = get_viewport_rect().size/2
 var SPEED : int = 15000
@@ -17,6 +17,7 @@ const ROTATION := {"U" : Vector2(0,-1), "D" : Vector2(0,1), "L" : Vector2(-1,0),
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	current_hp = hp
 	CENTER = get_viewport_rect().size/2
 	for i in ROTATION:
 		ROTATION[i] = ROTATION[i].normalized()
@@ -25,7 +26,6 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("shoot") && can_shoot:
 		shoot()
-
 
 func _physics_process(delta):
 	moving = true
@@ -61,6 +61,8 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("dash") && can_dash:
 			dash()
 		move(delta)
+		
+
 
 func shoot():
 	$CanShoot.start()
@@ -68,9 +70,9 @@ func shoot():
 	var direction = (get_global_mouse_position() - position).normalized()
 	var bullet_ins = bullet.instance()
 	bullet_ins.ini(direction,position)
-	get_node("/root/Pantalla1/YSort/Bullet").add_child(bullet_ins)
+	#bullet_ins.origin = "Player"
+	get_node("/root/Joc/YSort/Bullet").add_child(bullet_ins)
 	#get_tree().get_root().add_child(bullet_ins)
-	print(dir)
 	
 func move(delta) -> void:
 	var movement = delta * SPEED * ROTATION[dir]
@@ -86,6 +88,10 @@ func dash() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func OnHit(damage):
+	current_hp -= damage
+	print(current_hp)
 
 
 func _on_Duration_timeout():

@@ -8,6 +8,7 @@ extends Area2D
 var SPEED = 1000
 var direction : Vector2
 var shooter : Node
+var damage = 90
 onready var explosion = preload("res://Scenes/Explosion.tscn")
 
 
@@ -25,9 +26,18 @@ func _physics_process(delta):
 #	pass
 
 
-func _on_Area2D_body_entered(body):
-	if body.is_in_group("wall"):
+
+func _on_Bullet_body_entered(body):
+#	get_node("CollisionShape2D").set_deferred("disabled", true)
+	if body.is_in_group("Enemies"):
 		var explosion_instance = explosion.instance()
 		explosion_instance.position = get_global_position()
-		get_node("/root/Pantalla1/Explosion").add_child(explosion_instance)
-		queue_free()
+		get_node("/root/Joc/Explosion").add_child(explosion_instance)
+		body.OnHit(damage)
+		self.hide()
+	if body.is_in_group("wall"):
+		self.hide()
+
+		
+	
+

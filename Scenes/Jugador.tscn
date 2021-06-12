@@ -3,12 +3,11 @@
 [ext_resource path="res://Sounds/mixkit-fast-sci-fi-transition-sweep-3114.wav" type="AudioStream" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 
-[sub_resource type="StreamTexture" id=10]
+[sub_resource type="StreamTexture" id=1]
 flags = 4
 load_path = "res://.import/spritesheet.png-48e73ae10dcf05920b526aa1529ead4b.stex"
 
-[sub_resource type="Animation" id=1]
-resource_name = "IdleDown"
+[sub_resource type="Animation" id=2]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -24,8 +23,7 @@ tracks/0/keys = {
 "values": [ 2 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "IdleLeft"
+[sub_resource type="Animation" id=3]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -41,8 +39,7 @@ tracks/0/keys = {
 "values": [ 9 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "IdleRight"
+[sub_resource type="Animation" id=4]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -58,8 +55,7 @@ tracks/0/keys = {
 "values": [ 3 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "IdleUp"
+[sub_resource type="Animation" id=5]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -75,8 +71,7 @@ tracks/0/keys = {
 "values": [ 8 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "WalkDown"
+[sub_resource type="Animation" id=6]
 length = 0.5
 loop = true
 step = 0.05
@@ -93,8 +88,7 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "WalkLeft"
+[sub_resource type="Animation" id=7]
 length = 0.5
 loop = true
 step = 0.05
@@ -111,8 +105,7 @@ tracks/0/keys = {
 "values": [ 10, 11 ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "WalkRight"
+[sub_resource type="Animation" id=8]
 length = 0.5
 loop = true
 step = 0.05
@@ -129,8 +122,7 @@ tracks/0/keys = {
 "values": [ 4, 5 ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "WalkUp"
+[sub_resource type="Animation" id=9]
 length = 0.5
 loop = true
 step = 0.05
@@ -147,33 +139,37 @@ tracks/0/keys = {
 "values": [ 6, 7 ]
 }
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 27.2382, 16.2803 )
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 2.52269, -30.062 )
 scale = Vector2( 0.1, 0.1 )
-texture = SubResource( 10 )
-hframes = 6
+texture = SubResource( 1 )
 vframes = 2
-frame = 7
+hframes = 6
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-anims/IdleDown = SubResource( 1 )
-anims/IdleLeft = SubResource( 2 )
-anims/IdleRight = SubResource( 3 )
-anims/IdleUp = SubResource( 4 )
-anims/WalkDown = SubResource( 5 )
-anims/WalkLeft = SubResource( 6 )
-anims/WalkRight = SubResource( 7 )
-anims/WalkUp = SubResource( 8 )
+anims/IdleDown = SubResource( 2 )
+anims/IdleLeft = SubResource( 3 )
+anims/IdleRight = SubResource( 4 )
+anims/IdleUp = SubResource( 5 )
+anims/WalkDown = SubResource( 6 )
+anims/WalkLeft = SubResource( 7 )
+anims/WalkRight = SubResource( 8 )
+anims/WalkUp = SubResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.403793, -0.397038 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="Duration" type="Timer" parent="."]
 wait_time = 0.1
@@ -191,6 +187,10 @@ volume_db = -2.0
 wait_time = 0.3
 one_shot = true
 
+[node name="TurnAxis" type="Position2D" parent="."]
+
+[node name="CastPoint" type="Position2D" parent="TurnAxis"]
+position = Vector2( 25, 0 )
 [connection signal="timeout" from="Duration" to="." method="_on_Duration_timeout"]
 [connection signal="timeout" from="CanDash" to="." method="_on_CanDash_timeout"]
 [connection signal="timeout" from="CanShoot" to="." method="_on_CanShoot_timeout"]

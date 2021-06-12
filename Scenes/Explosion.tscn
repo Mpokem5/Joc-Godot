@@ -34,5 +34,4 @@ anims/Explosion = SubResource( 1 )
 [node name="Explode" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 attenuation = 3.0
-
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
