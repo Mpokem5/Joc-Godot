@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Tileset/Floor.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Jugador.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Scenes/Main.gd" type="Script" id=12]
 [ext_resource path="res://Scenes/Score.gd" type="Script" id=13]
 [ext_resource path="res://Scenes/Health.gd" type="Script" id=14]
+[ext_resource path="res://Sounds/bensound-scifi.wav" type="AudioStream" id=15]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -319,7 +320,8 @@ __meta__ = {
 [node name="Explosion" type="Node2D" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -10.0
+stream = ExtResource( 15 )
+volume_db = -25.0
 autoplay = true
 
 [node name="Joan" parent="." instance=ExtResource( 10 )]
