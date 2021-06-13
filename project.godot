@@ -22,6 +22,10 @@ config/icon="res://icon.png"
 
 Main="*res://Scenes/Main.gd"
 
+[display]
+
+mouse_cursor/custom_image="res://enemy crosshair/crosshair.png"
+
 [global]
 
 default=false
