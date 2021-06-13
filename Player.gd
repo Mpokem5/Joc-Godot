@@ -7,6 +7,7 @@ var can_dash = true
 var can_shoot = true
 var hp = 1000
 var current_hp
+
 var bullet = preload("res://Scenes/Bullet.tscn")
 
 onready var animationPlayer = $Sprite/AnimationPlayer
@@ -63,12 +64,16 @@ func _physics_process(delta):
 		move(delta)
 		
 
+func SkillLoop():
+	if Input.is_action_pressed("shoot"):
+		pass
 
 func shoot():
 	$CanShoot.start()
 	can_shoot = false
 	var direction = (get_global_mouse_position() - position).normalized()
 	var bullet_ins = bullet.instance()
+	bullet_ins.origin ="Player"
 	bullet_ins.ini(direction,position)
 	#bullet_ins.origin = "Player"
 	get_node("/root/Joc/YSort/Bullet").add_child(bullet_ins)
@@ -84,11 +89,7 @@ func dash() -> void:
 	can_dash = false
 	$Duration.start()
 	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+	
 func OnHit(damage):
 	current_hp -= damage
 	print(current_hp)
