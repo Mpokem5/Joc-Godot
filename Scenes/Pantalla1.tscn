@@ -280,6 +280,10 @@ collision_mask = 0
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/SlopeCube2/StaticBody2D"]
 polygon = PoolVector2Array( -120, 68, 0, 138, 120, -69 )
 
+[node name="Player" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 616, 1227 )
+collision_layer = 3
+
 [node name="YSort" type="YSort" parent="YSort"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -323,10 +327,6 @@ position = Vector2( 334.333, -18.9427 )
 
 [node name="Pere" parent="." instance=ExtResource( 10 )]
 position = Vector2( 1064.69, -461.366 )
-
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 616, 1227 )
-collision_layer = 3
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 

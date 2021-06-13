@@ -1,8 +1,12 @@
 extends KinematicBody2D
 
-onready var player = get_parent().get_node("Player")
+onready var player = get_parent().get_node("YSort/Player")
 onready var map_navegation = get_parent().get_node("Navigation2D")
 
+
+var texture1 = preload("res://enemy crosshair/enemy idle.png")
+var texture2 = preload("res://enemy crosshair/enemy broken.png")
+onready var sprite = get_node("Sprite")
 
 var speed = 120
 var max_hp = 40
@@ -20,6 +24,7 @@ var destination
 
 
 func _ready():
+	sprite.set_texture(texture1)
 	current_hp = max_hp
 
 func _process (delta):
@@ -44,10 +49,12 @@ func Attack():
 	get_node("TurnAxis").rotation = get_angle_to(player_position)
 	var Bullet_Enemic = preload("res://Scenes/Bullet.tscn")
 	var bullet_instance = Bullet_Enemic.instance()
-	var direction = (get_global_mouse_position() - position).normalized()
-	bullet_instance.rotation = get_angle_to(player_position)
+	var direction = (player_position - position).normalized()
+	
 	bullet_instance.position = get_node("TurnAxis/CastPoint").get_global_position()
+	
 	bullet_instance.ini(direction,bullet_instance.position )
+	
 	bullet_instance.rotation = get_angle_to(player_position)
 	bullet_instance.origin = "Enemy"
 	get_node("/root/Joc/YSort/Bullet").add_child(bullet_instance)
@@ -77,6 +84,8 @@ func Search(delta):
 
 func OnHit(damage):
 	current_hp -= damage
+	if current_hp <= max_hp/2:
+		sprite.set_texture(texture2)
 	if current_hp <=0:
 		Main.score += 10
 		OnDeath()
