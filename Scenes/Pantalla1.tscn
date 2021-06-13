@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Tileset/Floor.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Jugador.tscn" type="PackedScene" id=2]
@@ -11,6 +11,9 @@
 [ext_resource path="res://Sprites/Walls/cube_slope_right.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/Enemic.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Font.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://Scenes/Main.gd" type="Script" id=12]
+[ext_resource path="res://Scenes/Score.gd" type="Script" id=13]
+[ext_resource path="res://Scenes/Health.gd" type="Script" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -23,6 +26,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7, 8 ), PoolIntA
 outlines = [ PoolVector2Array( 1078.63, -746.646, 611.438, -482.347, 945.148, -292.8, 974.515, -271.443, 841.031, -47.1897, 357.819, -330.176, -245.529, 16.8826, 355.149, 363.941, 632.796, 211.769, 1214.79, 556.158, 1212.12, 676.293, 734.244, 964.619, 611.438, 900.546, 227.005, 1122.13, 715.556, 1407.79, 1140.03, 1164.84, 929.13, 1060.73, 1609.9, 646.927, 1161.39, 395.977, 1730.03, 30.2307, 1441.71, -124.611, 1318.9, -57.8687, 1182.75, -274.113, 1169.4, -290.131, 1412.34, -420.945, 1289.54, -487.687, 1412.34, -559.768 ) ]
 
 [node name="Joc" type="Node2D"]
+script = ExtResource( 12 )
 
 [node name="Floor" type="TileMap" parent="."]
 position = Vector2( 0, -1.5 )
@@ -282,6 +286,32 @@ polygon = PoolVector2Array( -120, 68, 0, 138, 120, -69 )
 current = true
 script = ExtResource( 6 )
 
+[node name="Score" type="Label" parent="Camera2D"]
+margin_left = 340.0
+margin_top = -295.0
+margin_right = 490.0
+margin_bottom = -251.0
+custom_fonts/font = SubResource( 1 )
+text = "Score: "
+align = 1
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health" type="Label" parent="Camera2D"]
+margin_left = 340.0
+margin_top = -250.0
+margin_right = 490.0
+margin_bottom = -206.0
+custom_fonts/font = SubResource( 1 )
+text = "Health: "
+align = 1
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Explosion" type="Node2D" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -297,29 +327,6 @@ position = Vector2( 1064.69, -461.366 )
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 616, 1227 )
 collision_layer = 3
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="CanvasLayer"]
-margin_left = 364.0
-margin_top = -290.0
-margin_right = 483.0
-margin_bottom = -250.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="CanvasLayer/Control"]
-margin_left = -24.0
-margin_top = -5.0
-margin_right = 126.0
-margin_bottom = 39.0
-custom_fonts/font = SubResource( 1 )
-text = "Score: "
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 

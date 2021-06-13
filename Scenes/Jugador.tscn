@@ -153,8 +153,8 @@ script = ExtResource( 2 )
 position = Vector2( 2.52269, -30.062 )
 scale = Vector2( 0.1, 0.1 )
 texture = SubResource( 1 )
-vframes = 2
 hframes = 6
+vframes = 2
 frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
@@ -191,6 +191,7 @@ one_shot = true
 
 [node name="CastPoint" type="Position2D" parent="TurnAxis"]
 position = Vector2( 25, 0 )
+
 [connection signal="timeout" from="Duration" to="." method="_on_Duration_timeout"]
 [connection signal="timeout" from="CanDash" to="." method="_on_CanDash_timeout"]
 [connection signal="timeout" from="CanShoot" to="." method="_on_CanShoot_timeout"]

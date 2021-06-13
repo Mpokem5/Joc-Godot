@@ -12,11 +12,11 @@ onready var explosion = preload("res://Scenes/Explosion.tscn")
 
 func _ready():
 	if origin == "Player":
-		damage = 30
+		damage = 10
 		projectile_speed = 300
 		set_collision_mask_bit(1,false)
 	elif origin == "Enemy":
-		damage = 20
+		damage = 1
 		projectile_speed = 300
 		set_collision_mask_bit(2,false)
 

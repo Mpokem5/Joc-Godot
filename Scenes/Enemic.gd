@@ -5,7 +5,7 @@ onready var map_navegation = get_parent().get_node("Navigation2D")
 
 
 var speed = 120
-var max_hp = 400
+var max_hp = 40
 var current_hp
 var dead = false
 var state = "Rest"
@@ -48,6 +48,7 @@ func Attack():
 	bullet_instance.rotation = get_angle_to(player_position)
 	bullet_instance.position = get_node("TurnAxis/CastPoint").get_global_position()
 	bullet_instance.ini(direction,bullet_instance.position )
+	bullet_instance.rotation = get_angle_to(player_position)
 	bullet_instance.origin = "Enemy"
 	get_node("/root/Joc/YSort/Bullet").add_child(bullet_instance)
 	yield(get_tree().create_timer(0.6), "timeout")
@@ -77,10 +78,12 @@ func Search(delta):
 func OnHit(damage):
 	current_hp -= damage
 	if current_hp <=0:
-		 OnDeath()
+		Main.score += 10
+		OnDeath()
 
 func OnDeath():
 	dead = true
+	emit_signal("updateScore", 1)
 #	get_node("AnimationPlayer").play("Death")
 #	get_node("CollisionPolygon2D").set_deferred("disabled", true)
 	queue_free()

@@ -5,7 +5,7 @@ var dir : String
 var moving : bool
 var can_dash = true
 var can_shoot = true
-var hp = 1000
+var hp = 5
 var current_hp
 
 var bullet = preload("res://Scenes/Bullet.tscn")
@@ -25,6 +25,11 @@ func _ready():
 	pass # Replace with function body.
 	
 func _process(delta):
+	Main.health = current_hp
+	if current_hp <= 0:
+		print("Game Over")
+		get_tree().change_scene("res://Scenes/GameOver.tscn")
+	
 	if Input.is_action_just_pressed("shoot") && can_shoot:
 		shoot()
 
