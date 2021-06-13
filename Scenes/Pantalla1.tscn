@@ -48,9 +48,6 @@ position = Vector2( 1080.16, -70.9535 )
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="Slope" type="YSort" parent="YSort"]
-sort_enabled = false
-
 [node name="Height0" type="YSort" parent="YSort" groups=[
 "wall",
 ]]
@@ -324,11 +321,11 @@ stream = ExtResource( 15 )
 volume_db = -25.0
 autoplay = true
 
-[node name="Joan" parent="." instance=ExtResource( 10 )]
+[node name="Enemy1" parent="." instance=ExtResource( 10 )]
 position = Vector2( 334.333, -18.9427 )
 
-[node name="Pere" parent="." instance=ExtResource( 10 )]
-position = Vector2( 1064.69, -461.366 )
+[node name="Enemy2" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1168.52, -499.507 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 
